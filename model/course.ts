@@ -10,7 +10,8 @@ export class Course {
 		public name: string,
 		public price: number,
 		public courseType: CourseTypeEnum,
-		public image: string
+		public image: string,
+		public description: string
 	) {}
 }
 
@@ -22,6 +23,7 @@ export const courses: Course[] = coursesJson.map(
 			course.name,
 			course.price,
 			CourseTypeEnum[course.courseType as keyof typeof CourseTypeEnum],
-			course.image
+			course.image,
+			course.description
 		)
 );

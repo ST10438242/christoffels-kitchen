@@ -3,60 +3,70 @@
       "name": "Bruschetta",
       "price": 5.99,
       "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Toasted bread rubbed with garlic and topped with olive oil, salt, and fresh tomatoes. A classic Italian appetizer."
     },
     {
       "name": "Caesar Salad",
       "price": 7.99,
       "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Crisp romaine lettuce, croutons, and parmesan cheese, tossed in a creamy Caesar dressing. Optional grilled chicken available."
     },
     {
       "name": "Steak",
       "price": 19.99,
       "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Juicy, tender 8oz sirloin steak cooked to your preference. Served with roasted vegetables and your choice of potato side."
     },
     {
       "name": "Salmon",
       "price": 18.99,
       "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Fresh Atlantic salmon fillet, grilled to perfection and served with lemon butter sauce, wild rice, and steamed asparagus."
     },
     {
       "name": "Cheesecake",
       "price": 6.99,
       "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Rich and creamy New York style cheesecake on a graham cracker crust. Topped with fresh berry compote."
     },
     {
       "name": "Chocolate Mousse",
       "price": 5.49,
       "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Light and airy chocolate mousse made with high-quality dark chocolate. Garnished with whipped cream and chocolate shavings."
     },
     {
       "name": "Garlic Bread",
       "price": 4.99,
       "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Freshly baked baguette slices topped with garlic butter and herbs, then toasted until golden brown. Served warm."
     },
     {
       "name": "Pasta Primavera",
       "price": 12.99,
       "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Al dente pasta tossed with a medley of fresh seasonal vegetables in a light garlic and olive oil sauce. Finished with grated parmesan."
     },
     {
       "name": "Tiramisu",
       "price": 7.49,
       "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Classic Italian dessert made with layers of coffee-soaked ladyfingers and creamy mascarpone cheese. Dusted with cocoa powder."
     },
     {
       "name": "Chicken Alfredo",
       "price": 14.99,
       "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg"
+      "image": "assets/images/dessert/1.jpg",
+      "description": "Tender grilled chicken breast served over fettuccine pasta, tossed in a rich and creamy Alfredo sauce. Garnished with parsley."
     }
   ]
