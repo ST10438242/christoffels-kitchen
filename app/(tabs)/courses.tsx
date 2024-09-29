@@ -215,10 +215,11 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	closeButton: {
-		backgroundColor: "#007AFF",
+		backgroundColor: "#27ae60", // Medium green color
 		padding: 10,
 		borderRadius: 5,
 		alignItems: "center",
+		marginTop: 20,
 	},
 	closeButtonText: {
 		color: "white",

@@ -1,72 +1,86 @@
 [
-    {
-      "name": "Bruschetta",
-      "price": 5.99,
-      "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Toasted bread rubbed with garlic and topped with olive oil, salt, and fresh tomatoes. A classic Italian appetizer."
-    },
-    {
-      "name": "Caesar Salad",
-      "price": 7.99,
-      "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Crisp romaine lettuce, croutons, and parmesan cheese, tossed in a creamy Caesar dressing. Optional grilled chicken available."
-    },
-    {
-      "name": "Steak",
-      "price": 19.99,
-      "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Juicy, tender 8oz sirloin steak cooked to your preference. Served with roasted vegetables and your choice of potato side."
-    },
-    {
-      "name": "Salmon",
-      "price": 18.99,
-      "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Fresh Atlantic salmon fillet, grilled to perfection and served with lemon butter sauce, wild rice, and steamed asparagus."
-    },
-    {
-      "name": "Cheesecake",
-      "price": 6.99,
-      "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Rich and creamy New York style cheesecake on a graham cracker crust. Topped with fresh berry compote."
-    },
-    {
-      "name": "Chocolate Mousse",
-      "price": 5.49,
-      "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Light and airy chocolate mousse made with high-quality dark chocolate. Garnished with whipped cream and chocolate shavings."
-    },
-    {
-      "name": "Garlic Bread",
-      "price": 4.99,
-      "courseType": "Starter",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Freshly baked baguette slices topped with garlic butter and herbs, then toasted until golden brown. Served warm."
-    },
-    {
-      "name": "Pasta Primavera",
-      "price": 12.99,
-      "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Al dente pasta tossed with a medley of fresh seasonal vegetables in a light garlic and olive oil sauce. Finished with grated parmesan."
-    },
-    {
-      "name": "Tiramisu",
-      "price": 7.49,
-      "courseType": "Dessert",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Classic Italian dessert made with layers of coffee-soaked ladyfingers and creamy mascarpone cheese. Dusted with cocoa powder."
-    },
-    {
-      "name": "Chicken Alfredo",
-      "price": 14.99,
-      "courseType": "Main",
-      "image": "assets/images/dessert/1.jpg",
-      "description": "Tender grilled chicken breast served over fettuccine pasta, tossed in a rich and creamy Alfredo sauce. Garnished with parsley."
-    }
-  ]
+  {
+    "name": "Mediterranean Pinwheels",
+    "price": 150,
+    "courseType": "Starter",
+    "image": "https://pbs.twimg.com/media/GYptZ6MWEAAUxCS?format=jpg&name=medium",
+    "description": "Flaky puff pastry rolled with a filling of hummus, spinach, roasted red peppers, feta cheese, and sun-dried tomatoes. A perfect bite-sized Mediterranean treat."
+  },
+  {
+    "name": "Fried Wonton",
+    "price": 80,
+    "courseType": "Starter",
+    "image": "https://pbs.twimg.com/media/GYptYPWXwAAviqC?format=jpg&name=medium",
+    "description": "Crispy fried wonton wrappers filled with a seasoned mix of pork, shrimp, garlic, and green onions. Served with a sweet chili dipping sauce."
+  },
+  {
+    "name": "Buffalo Chicken Taquitos",
+    "price": 100,
+    "courseType": "Starter",
+    "image": "https://pbs.twimg.com/media/GYptVY8W8AA0kvA?format=jpg&name=900x900",
+    "description": "Spicy shredded buffalo chicken wrapped in a crispy tortilla, filled with cream cheese, cheddar, and green onions. Served with ranch dipping sauce."
+  },
+  {
+    "name": "Asparagus Pastry Bundle",
+    "price": 130,
+    "courseType": "Starter",
+    "image": "https://pbs.twimg.com/media/GYptXCPWcAAB9sj?format=jpg&name=large",
+    "description": "Tender asparagus spears wrapped in buttery puff pastry, baked to perfection with a sprinkle of parmesan cheese and black pepper."
+  },
+  {
+    "name": "Smash Burger with Chips",
+    "price": 200,
+    "courseType": "Main",
+    "image": "https://pbs.twimg.com/media/GYptMVbWUAEMaFN?format=jpg&name=900x900",
+    "description": "Juicy smashed beef patty topped with melted cheddar, lettuce, tomato, and pickles. Served on a toasted bun with a side of crispy chips."
+  },
+  {
+    "name": "Beef Stew",
+    "price": 250,
+    "courseType": "Main",
+    "image": "https://pbs.twimg.com/media/GYptJVWXQAA-PAU?format=jpg&name=medium",
+    "description": "Hearty beef stew slow-cooked with tender chunks of beef, carrots, potatoes, onions, and peas, all simmered in a rich gravy."
+  },
+  {
+    "name": "Lasagna",
+    "price": 290,
+    "courseType": "Main",
+    "image": "https://pbs.twimg.com/media/GYptOLOXwAAe9Nm?format=jpg&name=900x900",
+    "description": "Layers of lasagna noodles, ricotta cheese, ground beef, marinara sauce, and mozzarella, baked to a golden, cheesy perfection."
+  },
+  {
+    "name": "Grilled Cheeseburger Wraps",
+    "price": 300,
+    "courseType": "Main",
+    "image": "https://pbs.twimg.com/media/GYptSaTX0AA78gQ?format=jpg&name=900x900",
+    "description": "Grilled flour tortillas stuffed with ground beef, cheddar cheese, lettuce, tomatoes, and pickles. A portable cheeseburger experience!"
+  },
+  {
+    "name": "S’mores Pizza",
+    "price": 200,
+    "courseType": "Dessert",
+    "image": "https://pbs.twimg.com/media/GYptgf1WUAA-HRv?format=jpg&name=medium",
+    "description": "A dessert pizza with a graham cracker crust, melted chocolate, and toasted marshmallows. A fun twist on the classic campfire treat."
+  },
+  {
+    "name": "Oreo Cheesecake",
+    "price": 80,
+    "courseType": "Dessert",
+    "image": "https://pbs.twimg.com/media/GYptkJIXwAA-sC5?format=jpg&name=900x900",
+    "description": "Creamy cheesecake filled with crushed Oreo cookies and topped with a chocolate drizzle and more Oreos for the perfect cookie lover's dessert."
+  },
+  {
+    "name": "Chocolate Coffee Cake",
+    "price": 60,
+    "courseType": "Dessert",
+    "image": "https://pbs.twimg.com/media/GYptiOlW4AEqiBy?format=jpg&name=900x900",
+    "description": "Moist chocolate cake infused with coffee flavour and topped with a crumbly chocolate streusel. A rich and indulgent treat."
+  },
+  {
+    "name": "Oreo Brownie Trifle",
+    "price": 120,
+    "courseType": "Dessert",
+    "image": "https://pbs.twimg.com/media/GYptfBwWMAAgKkm?format=jpg&name=900x900",
+    "description": "Layers of rich brownies, creamy pudding, whipped cream, and crushed Oreos stacked into a delightful and decadent trifle."
+  }
+]

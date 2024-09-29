@@ -5,6 +5,7 @@ import * as FileSystem from 'expo-file-system';
 interface MenuItemsContextType {
   menuItems: MenuItem[];
   addMenuItem: (item: MenuItem) => void;
+  removeMenuItem: (dishName: string) => void;
   refreshMenuItems: () => void;
 }
 
@@ -47,7 +48,14 @@ export function MenuItemsProvider({ children }: { children: React.ReactNode }) {
       saveMenuItems(newItems);
       return newItems;
     });
-    console.log("Menu item added:", item);
+  }, []);
+
+  const removeMenuItem = useCallback((dishName: string) => {
+    setMenuItems((prevItems) => {
+      const newItems = prevItems.filter(item => item.dishName !== dishName);
+      saveMenuItems(newItems);
+      return newItems;
+    });
   }, []);
 
   const refreshMenuItems = useCallback(() => {
@@ -55,7 +63,7 @@ export function MenuItemsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <MenuItemsContext.Provider value={{ menuItems, addMenuItem, refreshMenuItems }}>
+    <MenuItemsContext.Provider value={{ menuItems, addMenuItem, removeMenuItem, refreshMenuItems }}>
       {children}
     </MenuItemsContext.Provider>
   );
