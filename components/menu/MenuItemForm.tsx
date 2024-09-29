@@ -46,13 +46,14 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 		);
 	}, [dishName, description, selectedCourses, price]);
 
-	const isFieldValid = (field: string) => {
+	const isFieldValid = (field: string): boolean => {
 		switch (field) {
 			case 'dishName':
+				return dishName.trim() !== '';
 			case 'description':
-				return touchedFields.has(field) && eval(field).trim() !== '';
+				return description.trim() !== '';
 			case 'price':
-				return touchedFields.has(field) && price !== '' && !isNaN(Number(price));
+				return price !== '' && !isNaN(Number(price));
 			case 'courses':
 				return selectedCourses.length > 0;
 			default:
