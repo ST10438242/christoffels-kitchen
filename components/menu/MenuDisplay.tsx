@@ -4,6 +4,10 @@ import { MenuItem } from '../../model/menu-item';
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Ionicons } from '@expo/vector-icons';
+import { averagePriceOfCoursesInMenuItem } from '@/lib/helper';
+import { Image } from "expo-image";
+
+export const placeholderImage = require("../../assets/images/icon.png");
 
 interface Props {
     menuItems: MenuItem[];
@@ -30,8 +34,24 @@ const MenuDisplay = ({ menuItems, onItemPress, onItemRemove }: Props) => {
                 <ThemedView key={item.dishName} style={styles.itemContainer}>
                     <TouchableOpacity onPress={() => onItemPress(item)} style={styles.itemContent}>
                         <ThemedText type="subtitle" style={styles.dishName}>{item.dishName}</ThemedText>
+
+                        <Image
+                            style={styles.modalCourseImage}
+                            source={
+                                item.courses[0].image.includes("http")
+                                    ? { uri: item.courses[0].image }
+                                    : `../../${item.courses[0].image}`
+                                    ? `../../${item.courses[0].image}`
+                                    : placeholderImage
+                            }
+                            placeholder={placeholderImage}
+                            contentFit="cover"
+                            transition={300}
+                        />
+
                         <ThemedText style={styles.description}>{item.description}</ThemedText>
                         <ThemedText style={styles.courseCount}>Courses: {item.courses.length}</ThemedText>
+                        <ThemedText type="defaultSemiBold" style={styles.price}>Average Price: R{averagePriceOfCoursesInMenuItem(item).toFixed(2)}</ThemedText>
                         <ThemedText type="defaultSemiBold" style={styles.price}>Total Price: R{item.price.toFixed(2)}</ThemedText>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => handleRemove(item.dishName)} style={styles.removeButton}>
@@ -85,6 +105,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
+    modalCourseImage: {
+		width: 80,
+		height: 80,
+		borderRadius: 5,
+		marginRight: 10,
+	},
 });
 
 export default MenuDisplay;

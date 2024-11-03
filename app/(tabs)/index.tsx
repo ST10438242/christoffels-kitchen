@@ -13,8 +13,9 @@ import { useMenuItems } from "../../hooks/use-menu-items";
 import MenuDisplay from "../../components/menu/MenuDisplay";
 import { MenuItem } from "../../model/menu-item";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { averagePriceOfCoursesInMenuItem } from "@/lib/helper";
 
-const placeholderImage = require("../../assets/images/icon.png");
+export const placeholderImage = require("../../assets/images/icon.png");
 
 export default function Menu() {
 	const { menuItems, removeMenuItem } = useMenuItems();
@@ -93,6 +94,10 @@ export default function Menu() {
 										</ThemedView>
 									))}
 									<ThemedText style={styles.modalPrice}>
+										Average Price: R
+										{averagePriceOfCoursesInMenuItem(selectedItem).toFixed(2)}
+									</ThemedText>
+									<ThemedText style={styles.modalPrice}>
 										Total Price: R
 										{selectedItem.price.toFixed(2)}
 									</ThemedText>
@@ -142,7 +147,7 @@ export default function Menu() {
 	);
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 20,
