@@ -4,8 +4,10 @@ import * as FileSystem from 'expo-file-system';
 
 interface MenuItemsContextType {
   menuItems: MenuItem[];
+  addedItems: MenuItem[];
   addMenuItem: (item: MenuItem) => void;
   removeMenuItem: (dishName: string) => void;
+  setAddedItems: (items: MenuItem[]) => void;
   refreshMenuItems: () => void;
 }
 
@@ -15,6 +17,7 @@ const MENU_ITEMS_FILE = FileSystem.documentDirectory + 'menu-items.json';
 
 export function MenuItemsProvider({ children }: { children: React.ReactNode }) {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [addedItems, setAddedItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
     loadMenuItems();
@@ -63,7 +66,7 @@ export function MenuItemsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <MenuItemsContext.Provider value={{ menuItems, addMenuItem, removeMenuItem, refreshMenuItems }}>
+    <MenuItemsContext.Provider value={{ menuItems, addedItems, setAddedItems, addMenuItem, removeMenuItem, refreshMenuItems }}>
       {children}
     </MenuItemsContext.Provider>
   );

@@ -29,5 +29,5 @@ export function averagePriceOfCoursesInMenuItem(menuItem: MenuItem) {
 		countPrices++;
 	}
 
-	return Math.round(totalPrice / menuItemCoursePrices.length);
+	return totalPrice / menuItemCoursePrices.length;
 }
