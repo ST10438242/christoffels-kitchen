@@ -1,5 +1,3 @@
-export class User {
-	type: "CHEF" | "GUEST" = "CHEF";
-}
-
-export const LIMIT_OF_ITEMS = 5;
+// GLOBAL VARIABLE
+export const generateUniqueId = () =>
+	`${Date.now()}-${Math.floor(Math.random() * 10000)}`;
