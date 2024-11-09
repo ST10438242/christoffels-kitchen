@@ -12,23 +12,29 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { generateUniqueId } from "@/global/global-variable";
+import { Picker } from "@react-native-picker/picker";
 
 const placeholderImage = require("../../assets/images/icon.png");
 
 export default function Courses() {
 	const backgroundColor = useThemeColor({}, "background");
+	const pickerColor = useThemeColor({}, "text");
 	const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+	const [selectedType, setSelectedType] = useState<CourseTypeEnum | "All">(
+		"All"
+	);
 
-	const coursesByType = useMemo(() => {
-		return Object.values(CourseTypeEnum).reduce((acc, type) => {
-			acc[type] = courses.filter((course) => course.courseType === type);
-			return acc;
-		}, {} as Record<CourseTypeEnum, typeof courses>);
-	}, []);
+	const filteredCourses = useMemo(() => {
+		if (selectedType === "All") {
+			return courses;
+		}
+		return courses.filter((course) => course.courseType === selectedType);
+	}, [selectedType]);
 
 	const renderCourseItem = (course: Course) => (
 		<TouchableOpacity
-			key={course.name}
+			key={course.name + generateUniqueId()}
 			style={styles.courseItem}
 			onPress={() => setSelectedCourse(course)}
 		>
@@ -116,19 +122,28 @@ export default function Courses() {
 					Courses
 				</ThemedText>
 				<ThemedView style={[styles.container, { backgroundColor }]}>
-					{Object.entries(coursesByType).map(
-						([type, typeCourses]) => (
-							<View key={type}>
-								<ThemedText
-									type="subtitle"
-									style={styles.sectionTitle}
-								>
-									{type}
-								</ThemedText>
-								{typeCourses.map(renderCourseItem)}
-							</View>
-						)
-					)}
+					<View style={styles.filterContainer}>
+						<ThemedText style={styles.filterLabel}>
+							Filter by Course Type:
+						</ThemedText>
+						<Picker
+							selectedValue={selectedType}
+							style={[styles.picker, { color: pickerColor }]}
+							onValueChange={(itemValue) =>
+								setSelectedType(itemValue)
+							}
+						>
+							<Picker.Item label="All" value="All" />
+							{Object.values(CourseTypeEnum).map((type) => (
+								<Picker.Item
+									key={type}
+									label={type}
+									value={type}
+								/>
+							))}
+						</Picker>
+					</View>
+					{filteredCourses.map(renderCourseItem)}
 				</ThemedView>
 				{renderCourseModal()}
 			</ThemedView>
@@ -150,7 +165,6 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	sectionTitle: {
-		// marginTop: 15,
 		marginBottom: 10,
 		fontSize: 20,
 		fontWeight: "bold",
@@ -215,8 +229,7 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	closeButton: {
-		backgroundColor: "#27ae60", // Medium green color
-		padding: 10,
+		backgroundColor: "#27ae60",
 		borderRadius: 5,
 		alignItems: "center",
 		marginTop: 20,
@@ -225,5 +238,16 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 16,
 		fontWeight: "bold",
+	},
+	filterContainer: {
+		marginBottom: 20,
+	},
+	filterLabel: {
+		fontSize: 16,
+		marginBottom: 5,
+	},
+	picker: {
+		height: 50,
+		width: "100%",
 	},
 });
