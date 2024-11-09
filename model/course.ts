@@ -1,4 +1,3 @@
-// model/course.ts
 export enum CourseTypeEnum {
 	Starter = "Starter",
 	Main = "Main",

@@ -27,6 +27,7 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 	const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
 	const [price, setPrice] = useState("");
 	const [isFormValid, setIsFormValid] = useState(false);
+	// eslint-disable-next-line
 	const [touchedFields, setTouchedFields] = useState<Set<string>>(new Set());
 	const [showErrors, setShowErrors] = useState(false);
 

@@ -31,7 +31,7 @@ const Notification: React.FC<NotificationProps> = ({ message, duration = 3000, o
         }
       })
     );
-  }, [duration, onHide]);
+  }, [duration, onHide, opacity]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
