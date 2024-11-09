@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-	StyleSheet,
-	Modal,
-	TouchableOpacity,
-	ScrollView,
-} from "react-native";
+import { StyleSheet, Modal, TouchableOpacity, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -14,20 +9,17 @@ import MenuDisplay from "../../components/menu/MenuDisplay";
 import { MenuItem } from "../../model/menu-item";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { averagePriceOfCoursesInMenuItem } from "@/lib/helper";
+import { generateUniqueId } from "@/global/global-variable";
 
 export const placeholderImage = require("../../assets/images/icon.png");
 
 export default function Menu() {
-	const { menuItems, removeMenuItem } = useMenuItems();
+	const { menuItems } = useMenuItems();
 	const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 	const backgroundColor = useThemeColor({}, "background");
 
 	const handleItemPress = (item: MenuItem) => {
 		setSelectedItem(item);
-	};
-
-	const handleItemRemove = (dishName: string) => {
-		removeMenuItem(dishName);
 	};
 
 	const renderItemModal = () => (
@@ -37,83 +29,85 @@ export default function Menu() {
 			animationType="slide"
 			onRequestClose={() => setSelectedItem(null)}
 		>
-				<ThemedView style={styles.modalOverlay}>
-					<ThemedView style={[styles.modalContent, { backgroundColor }]}>
-						<ScrollView>
-							{selectedItem && (
-								<>
-									<ThemedText style={styles.modalTitle}>
-										{selectedItem.dishName}
-									</ThemedText>
-									<ThemedText style={styles.modalDescription}>
-										{selectedItem.description}
-									</ThemedText>
-									<ThemedText style={styles.modalSectionTitle}>
-										Courses:
-									</ThemedText>
-									{selectedItem.courses.map((course, index) => (
+			<ThemedView style={styles.modalOverlay}>
+				<ThemedView style={[styles.modalContent, { backgroundColor }]}>
+					<ScrollView>
+						{selectedItem && (
+							<>
+								<ThemedText style={styles.modalTitle}>
+									{selectedItem.dishName}
+								</ThemedText>
+								<ThemedText style={styles.modalDescription}>
+									{selectedItem.description}
+								</ThemedText>
+								<ThemedText style={styles.modalSectionTitle}>
+									Courses:
+								</ThemedText>
+								{selectedItem.courses.map((course, index) => (
+									<ThemedView
+										key={index + generateUniqueId()}
+										style={styles.modalCourseContainer}
+									>
+										<Image
+											style={styles.modalCourseImage}
+											source={
+												course.image.includes("http")
+													? { uri: course.image }
+													: `../../${course.image}`
+													? `../../${course.image}`
+													: placeholderImage
+											}
+											placeholder={placeholderImage}
+											contentFit="cover"
+											transition={300}
+										/>
 										<ThemedView
-											key={index}
-											style={styles.modalCourseContainer}
+											style={styles.modalCourseDetails}
 										>
-											<Image
-												style={styles.modalCourseImage}
-												source={
-													course.image.includes("http")
-														? { uri: course.image }
-														: `../../${course.image}`
-														? `../../${course.image}`
-														: placeholderImage
-												}
-												placeholder={placeholderImage}
-												contentFit="cover"
-												transition={300}
-											/>
-											<ThemedView
-												style={styles.modalCourseDetails}
+											<ThemedText
+												style={styles.modalCourseName}
 											>
-												<ThemedText
-													style={styles.modalCourseName}
-												>
-													{course.name} (
-													{course.courseType})
-												</ThemedText>
-												<ThemedText
-													style={
-														styles.modalCourseDescription
-													}
-												>
-													{course.description}
-												</ThemedText>
-												<ThemedText
-													style={styles.modalCoursePrice}
-												>
-													R{course.price.toFixed(2)}
-												</ThemedText>
-											</ThemedView>
+												{course.name} (
+												{course.courseType})
+											</ThemedText>
+											<ThemedText
+												style={
+													styles.modalCourseDescription
+												}
+											>
+												{course.description}
+											</ThemedText>
+											<ThemedText
+												style={styles.modalCoursePrice}
+											>
+												R{course.price.toFixed(2)}
+											</ThemedText>
 										</ThemedView>
-									))}
-									<ThemedText style={styles.modalPrice}>
-										Average Price: R
-										{averagePriceOfCoursesInMenuItem(selectedItem).toFixed(2)}
-									</ThemedText>
-									<ThemedText style={styles.modalPrice}>
-										Total Price: R
-										{selectedItem.price.toFixed(2)}
-									</ThemedText>
-								</>
-							)}
-						</ScrollView>
-						<TouchableOpacity
-							style={styles.closeButton}
-							onPress={() => setSelectedItem(null)}
-						>
-							<ThemedText style={styles.closeButtonText}>
-								Close
-							</ThemedText>
-						</TouchableOpacity>
-					</ThemedView>
+									</ThemedView>
+								))}
+								<ThemedText style={styles.modalPrice}>
+									Average Price: R
+									{averagePriceOfCoursesInMenuItem(
+										selectedItem
+									).toFixed(2)}
+								</ThemedText>
+								<ThemedText style={styles.modalPrice}>
+									Total Price: R
+									{selectedItem.price.toFixed(2)}
+								</ThemedText>
+							</>
+						)}
+					</ScrollView>
+					<TouchableOpacity
+						style={styles.closeButton}
+						onPress={() => setSelectedItem(null)}
+					>
+						<ThemedText style={styles.closeButtonText}>
+							Close
+						</ThemedText>
+					</TouchableOpacity>
 				</ThemedView>
+			</ThemedView>
 		</Modal>
 	);
 
@@ -129,7 +123,6 @@ export default function Menu() {
 					<MenuDisplay
 						menuItems={menuItems}
 						onItemPress={handleItemPress}
-						onItemRemove={handleItemRemove}
 					/>
 				) : (
 					<ThemedView style={styles.emptyState}>
@@ -224,7 +217,7 @@ export const styles = StyleSheet.create({
 		marginTop: 15,
 	},
 	closeButton: {
-		backgroundColor: "#27ae60", // Medium green color
+		backgroundColor: "#27ae60",
 		padding: 10,
 		borderRadius: 5,
 		alignItems: "center",

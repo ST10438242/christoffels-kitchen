@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -10,8 +10,6 @@ import Animated, {
 import { ThemedText } from '@/components/ThemedText';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
-const { width } = Dimensions.get('window');
-
 interface NotificationProps {
   message: string;
   duration?: number;
@@ -21,23 +19,23 @@ interface NotificationProps {
 const Notification: React.FC<NotificationProps> = ({ message, duration = 3000, onHide }) => {
   const backgroundColor = useThemeColor({}, 'tint');
   const textColor = useThemeColor({}, 'background');
-  const translateY = useSharedValue(-100);
+  const opacity = useSharedValue(0);
 
   useEffect(() => {
-    translateY.value = withSequence(
-      withTiming(0, { duration: 300 }),
-      withTiming(0, { duration: duration - 600 }),
-      withTiming(-100, { duration: 300 }, (finished) => {
+    opacity.value = withSequence(
+      withTiming(1, { duration: 300 }),
+      withTiming(1, { duration: duration - 600 }),
+      withTiming(0, { duration: 300 }, (finished) => {
         if (finished) {
           runOnJS(onHide)();
         }
       })
     );
-  }, []);
+  }, [duration, onHide]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: translateY.value }],
+      opacity: opacity.value,
     };
   });
 
@@ -50,19 +48,21 @@ const Notification: React.FC<NotificationProps> = ({ message, duration = 3000, o
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    top: 50,
+    left: 20,
+    right: 20,
     padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
+    elevation: 5,
     zIndex: 1000,
   },
   text: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

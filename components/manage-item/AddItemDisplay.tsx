@@ -3,50 +3,40 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { MenuItem } from "../../model/menu-item";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { Ionicons } from "@expo/vector-icons";
 import { averagePriceOfCoursesInMenuItem } from "@/lib/helper";
 import { Image } from "expo-image";
-import { generateUniqueId } from "@/global/global-variable";
-
-export const placeholderImage = require("../../assets/images/icon.png");
 
 interface Props {
-	menuItems: MenuItem[];
-	onItemPress: (item: MenuItem) => void;
+	addItems: MenuItem[];
+	onItemRemove: (item: MenuItem) => void;
 }
 
-const MenuDisplay = ({ menuItems, onItemPress }: Props) => {
+const AddedItemsDisplay = ({ addItems, onItemRemove }: Props) => {
 	return (
 		<ThemedView style={styles.container}>
 			<ThemedText style={styles.totalItems}>
-				Total Items: {menuItems.length}
+				Total Items: {addItems.length}
 			</ThemedText>
-			{menuItems.map((item) => (
+			{addItems.map((item, index) => (
 				<ThemedView
-					key={`${item.dishName}-${item.price}-${generateUniqueId()}`}
+					key={`${item.dishName}-${item.price}-${index}`}
 					style={styles.itemContainer}
 				>
-					<TouchableOpacity
-						onPress={() => onItemPress(item)}
-						style={styles.itemContent}
-					>
+					<TouchableOpacity style={styles.itemContent}>
 						<ThemedText type="subtitle" style={styles.dishName}>
 							{item.dishName}
 						</ThemedText>
-
 						<Image
 							style={styles.modalCourseImage}
 							source={
 								item.courses[0].image.includes("http")
 									? { uri: item.courses[0].image }
-									: `../../${item.courses[0].image}`
-									? `../../${item.courses[0].image}`
-									: placeholderImage
+									: require("../../assets/images/icon.png") // Placeholder image
 							}
-							placeholder={placeholderImage}
 							contentFit="cover"
 							transition={300}
 						/>
-
 						<ThemedText style={styles.description}>
 							{item.description}
 						</ThemedText>
@@ -60,6 +50,12 @@ const MenuDisplay = ({ menuItems, onItemPress }: Props) => {
 						<ThemedText type="defaultSemiBold" style={styles.price}>
 							Total Price: R{item.price.toFixed(2)}
 						</ThemedText>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => onItemRemove(item)}
+						style={styles.removeButton}
+					>
+						<Ionicons name="trash-outline" size={24} color="red" />
 					</TouchableOpacity>
 				</ThemedView>
 			))}
@@ -117,4 +113,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default MenuDisplay;
+export default AddedItemsDisplay;

@@ -27,9 +27,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="add-items"
+        name="manage-items"
         options={{
-          title: 'Add Menu Item',
+          title: 'Manage',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'add-circle' : 'add-circle-outline'} color={color} />
           ),

@@ -7,18 +7,15 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedButton } from "@/components/ThemedButton";
 import { ThemedTextInput } from "@/components/ThemedTextInput";
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
-  withSpring, 
-  withSequence, 
-  withTiming,
-  withRepeat,
-  Easing
-} from 'react-native-reanimated';
-import { View } from 'react-native';
+import Animated, {
+	useSharedValue,
+	useAnimatedStyle,
+	withSpring,
+} from "react-native-reanimated";
+import { View } from "react-native";
+import { generateUniqueId } from "@/global/global-variable";
 
-const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 
 interface Props {
 	onAddItem: (item: MenuItem) => void;
@@ -39,22 +36,22 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 	useEffect(() => {
 		setIsFormValid(
 			dishName !== "" &&
-			description !== "" &&
-			selectedCourses.length > 0 &&
-			price !== "" &&
-			!isNaN(Number(price))
+				description !== "" &&
+				selectedCourses.length > 0 &&
+				price !== "" &&
+				!isNaN(Number(price))
 		);
 	}, [dishName, description, selectedCourses, price]);
 
 	const isFieldValid = (field: string): boolean => {
 		switch (field) {
-			case 'dishName':
-				return dishName.trim() !== '';
-			case 'description':
-				return description.trim() !== '';
-			case 'price':
-				return price !== '' && !isNaN(Number(price));
-			case 'courses':
+			case "dishName":
+				return dishName.trim() !== "";
+			case "description":
+				return description.trim() !== "";
+			case "price":
+				return price !== "" && !isNaN(Number(price));
+			case "courses":
 				return selectedCourses.length > 0;
 			default:
 				return true;
@@ -62,7 +59,7 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 	};
 
 	const handleFieldBlur = (field: string) => {
-		setTouchedFields(prev => new Set(prev).add(field));
+		setTouchedFields((prev) => new Set(prev).add(field));
 	};
 
 	const animatedStyle = useAnimatedStyle(() => {
@@ -91,30 +88,12 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 	};
 
 	const handleAddItem = () => {
-		setShowErrors(true);
 		if (isFormValid) {
-			onAddItem(
-				new MenuItem(
-					dishName,
-					description,
-					selectedCourses,
-					Number(price)
-				)
-			);
-			animationProgress.value = withSequence(
-				withTiming(1, { duration: 300 }),
-				withTiming(0, { duration: 300 })
-			);
-			setTimeout(resetForm, 600);
+			const newItem = new MenuItem(dishName, description, selectedCourses, Number(price));
+			onAddItem(newItem);
+			resetForm();
 		} else {
-			buttonShake.value = withRepeat(
-				withSequence(
-					withTiming(-10, { duration: 50, easing: Easing.linear }),
-					withTiming(10, { duration: 100, easing: Easing.linear }),
-					withTiming(0, { duration: 50, easing: Easing.linear })
-				),
-				3
-			);
+			setShowErrors(true);
 		}
 	};
 
@@ -130,61 +109,105 @@ const MenuItemForm: React.FC<Props> = ({ onAddItem }) => {
 		<Animated.View style={[styles.container, animatedStyle]}>
 			<View style={styles.inputContainer}>
 				<ThemedTextInput
-					style={[styles.input, showErrors && !isFieldValid('dishName') && styles.invalidInput]}
+					style={[
+						styles.input,
+						showErrors &&
+							!isFieldValid("dishName") &&
+							styles.invalidInput,
+					]}
 					placeholder="Dish Name *"
 					value={dishName}
 					onChangeText={setDishName}
-					onBlur={() => handleFieldBlur('dishName')}
+					onBlur={() => handleFieldBlur("dishName")}
 				/>
-				{showErrors && !isFieldValid('dishName') && <ThemedText style={styles.errorText}>Dish name is required</ThemedText>}
+				{showErrors && !isFieldValid("dishName") && (
+					<ThemedText style={styles.errorText}>
+						Dish name is required
+					</ThemedText>
+				)}
 			</View>
-			
+
 			<View style={styles.inputContainer}>
 				<ThemedTextInput
-					style={[styles.input, showErrors && !isFieldValid('description') && styles.invalidInput]}
+					style={[
+						styles.input,
+						showErrors &&
+							!isFieldValid("description") &&
+							styles.invalidInput,
+					]}
 					placeholder="Description *"
 					value={description}
 					onChangeText={setDescription}
-					onBlur={() => handleFieldBlur('description')}
+					onBlur={() => handleFieldBlur("description")}
 					multiline
 					numberOfLines={3}
 				/>
-				{showErrors && !isFieldValid('description') && <ThemedText style={styles.errorText}>Description is required</ThemedText>}
+				{showErrors && !isFieldValid("description") && (
+					<ThemedText style={styles.errorText}>
+						Description is required
+					</ThemedText>
+				)}
 			</View>
-			
+
 			<View style={styles.inputContainer}>
 				<ThemedTextInput
-					style={[styles.input, showErrors && !isFieldValid('price') && styles.invalidInput]}
+					style={[
+						styles.input,
+						showErrors &&
+							!isFieldValid("price") &&
+							styles.invalidInput,
+					]}
 					placeholder="Price *"
 					value={price}
 					onChangeText={setPrice}
-					onBlur={() => handleFieldBlur('price')}
+					onBlur={() => handleFieldBlur("price")}
 					keyboardType="numeric"
 				/>
-				{showErrors && !isFieldValid('price') && <ThemedText style={styles.errorText}>Valid price is required</ThemedText>}
+				{showErrors && !isFieldValid("price") && (
+					<ThemedText style={styles.errorText}>
+						Valid price is required
+					</ThemedText>
+				)}
 			</View>
-			
-			<ThemedText type="subtitle" style={styles.sectionTitle}>Select Courses: *</ThemedText>
+
+			<ThemedText type="subtitle" style={styles.sectionTitle}>
+				Select Courses: *
+			</ThemedText>
 			<ThemedView style={styles.checkboxContainer}>
 				{courses.map((course) => (
-					<ThemedView key={course.name} style={styles.checkbox}>
+					<ThemedView
+						key={`${course.name}-${
+							course.price
+						}-${generateUniqueId()}`}
+						style={styles.checkbox}
+					>
 						<Checkbox
 							value={selectedCourses.includes(course)}
 							onValueChange={() => toggleCourse(course)}
-							color={selectedCourses.includes(course) ? '#4630EB' : undefined}
+							color={
+								selectedCourses.includes(course)
+									? "#4630EB"
+									: undefined
+							}
 						/>
 						<ThemedText style={styles.checkboxLabel}>
-							{`${course.name} (${course.courseType}) - R${course.price.toFixed(2)}`}
+							{`${course.name} (${
+								course.courseType
+							}) - R${course.price.toFixed(2)}`}
 						</ThemedText>
 					</ThemedView>
 				))}
 			</ThemedView>
-			{showErrors && !isFieldValid('courses') && <ThemedText style={styles.errorText}>At least one course must be selected</ThemedText>}
+			{showErrors && !isFieldValid("courses") && (
+				<ThemedText style={styles.errorText}>
+					At least one course must be selected
+				</ThemedText>
+			)}
 
 			<Animated.View style={buttonAnimatedStyle}>
-				<ThemedButton 
-					title="Add Item" 
-					onPress={handleAddItem} 
+				<ThemedButton
+					title="Add Item"
+					onPress={handleAddItem}
 					style={styles.button}
 				/>
 			</Animated.View>
@@ -202,7 +225,7 @@ const styles = StyleSheet.create({
 	sectionTitle: {
 		marginBottom: 10,
 		fontSize: 20,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 	},
 	checkboxContainer: {
 		marginBottom: 20,
@@ -223,11 +246,11 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 	},
 	invalidInput: {
-		borderColor: 'red',
+		borderColor: "red",
 		borderWidth: 1,
 	},
 	errorText: {
-		color: 'red',
+		color: "red",
 		fontSize: 12,
 		marginTop: 5,
 	},
