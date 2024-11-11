@@ -9,4 +9,4 @@ Here are the following changes i did:
 2. I used Globale variables.
 3. I used fucntions to organise code.
 4. I moved the "adding of the menu items" feature from the home screen to a newly created separate screen.
-
+5. I added a filter feature for app users in the courses page
